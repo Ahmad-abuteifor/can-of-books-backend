@@ -33,8 +33,21 @@ const deleteBook = (request, response) => {
   });
 
 }
+
+
+
+const updateBook = (request, response) => {
+   const { title, description, status, email } = request.body;
+   const bookId = request.params.books_id;
+
+   BookModel.findByIdAndUpdate({ _id: bookId }, { title, description, status, email }, { new: true }, (error, updatedbookData) => {
+
+    response.json(updatedbookData);
+  });
+}
 module.exports = {
   getBooks,
   createBook,
-  deleteBook
+  deleteBook,
+  updateBook
 }
